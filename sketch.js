@@ -10,7 +10,7 @@ function Grid(xPos,yPos,xLen,yLen,blockSize) {
 		stroke(0);
 		strokeWeight(2);
 		fill(255);
-		rect(this.position.x,this.position.y,this.xLen*this.blockSize,this.yLen*this.blockSize)
+		rect(this.position.x,this.position.y,this.xLen*this.blockSize,this.yLen*this.blockSize);
 	}
 }
 
@@ -20,12 +20,12 @@ Pellet = function(grid,xPos,yPos) {
 
 Player = function(grid,xPos,yPos) {
 	this.position = createVector(xPos,yPos);
-	this.nextStep = createVector(1,0);
+	this.direction = createVector(1,0);
 	this.move = function() {
-		this.position.add(this.nextStep);
+		this.position.add(this.direction);
 	}
 	this.draw = function() {
-		if(frameCount % 5 === 0) {
+		if(frameCount % 10 === 0) {
 			this.move();
 			if(this.position.x > grid.xLen-1) {
 				this.position.x = 0;
@@ -61,12 +61,12 @@ function draw() {
 
 function keyPressed() {
 	if(key === "W") {
-		game.players[0].nextStep.set(0,-1);
-	} if(key === "S") {
-		game.players[0].nextStep.set(0,1);
-	} if(key === "D") {
-		game.players[0].nextStep.set(1,0);
-	} if(key === "A") {
-		game.players[0].nextStep.set(-1,0);
+		game.players[0].direction.set(0,-1);
+	} else if(key === "S") {
+		game.players[0].direction.set(0,1);
+	} else if(key === "D") {
+		game.players[0].direction.set(1,0);
+	} else if(key === "A") {
+		game.players[0].direction.set(-1,0);
 	} 
 }
