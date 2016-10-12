@@ -38,6 +38,7 @@ TailPart = function(grid,ply,xPos,yPos) {
 Player = function(grid,xPos,yPos) {
 	this.position = createVector(xPos,yPos);
 	this.nextStep = createVector(1,0);
+	this.lastStep = createVector(1,0);
 	this.stepCount = 0;
 	this.tailLength = 38;
 	this.headColor = [255,0,0];
@@ -46,7 +47,11 @@ Player = function(grid,xPos,yPos) {
 	this.move = function() {
 	  grid.tailParts.push(new TailPart(grid,this,this.position.x,this.position.y));
 	  grid.tailParts[grid.tailParts.length-1].color = this.tailColor;
+		if((this.nextStep.x * -1 === this.lastStep.x) && (this.nextStep.y * -1 === this.lastStep.y)) {
+			this.nextStep.mult(-1);
+		}
 		this.position.add(this.nextStep);
+		this.lastStep.set(this.nextStep);
 		this.stepCount ++;
 		var tp = grid.tailParts.length;
 		while(tp--) {
