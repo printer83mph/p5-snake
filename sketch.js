@@ -40,7 +40,7 @@ Player = function(grid,xPos,yPos) {
 	this.nextStep = createVector(1,0);
 	this.lastStep = createVector(1,0);
 	this.stepCount = 0;
-	this.tailLength = 38;
+	this.tailLength = 5;
 	this.headColor = [255,0,0];
 	this.tailColor = [200,100,0];
 	this.alive = true;
@@ -61,7 +61,7 @@ Player = function(grid,xPos,yPos) {
 		}
 	}
 	this.draw = function() {
-		if(frameCount % 5 === 0) {
+		if((frameCount - game.startFrame) % 5 === 0) {
 			this.move();
 			if(this.position.x > grid.xLen-1) {
 				this.position.x = 0;
@@ -87,6 +87,7 @@ function setup() {
 	  gameState = 0;
 	  game.tailParts = [];
 	  game.players = [];
+		game.startFrame = frameCount;
 		game.players.push(new Player(game,0,13));
 		game.players[0].headColor = [0,0,255];
 		game.players[0].tailColor = [0,100,255];
@@ -106,8 +107,14 @@ function draw() {
 			game.players[ply].draw();
 		}
 	}
-	if(frameCount % 5 === 0) {
-  	var tp = game.tailParts.length;
+	if((frameCount - game.startFrame) % 5 === 0) {
+  	if((frameCount - game.startFrame) % 200 === 0) {
+			var ply = game.players.length;
+  	  while(ply--) {
+    	  game.players[ply].tailLength += 2;
+  	  }
+		}
+		var tp = game.tailParts.length;
   	while(tp--) {
   	  var ply = game.players.length;
   	  while(ply--) {
