@@ -40,7 +40,7 @@ Player = function(grid,xPos,yPos) {
 	this.nextStep = createVector(1,0);
 	this.lastStep = createVector(1,0);
 	this.stepCount = 0;
-	this.tailLength = 5;
+	this.tailLength = 20;
 	this.headColor = [255,0,0];
 	this.tailColor = [200,100,0];
 	this.alive = true;
@@ -108,7 +108,7 @@ function draw() {
 		}
 	}
 	if((frameCount - game.startFrame) % 5 === 0) {
-  	if((frameCount - game.startFrame) % 200 === 0) {
+  	if((frameCount - game.startFrame) % 100 === 0) {
 			var ply = game.players.length;
   	  while(ply--) {
     	  game.players[ply].tailLength += 2;
