@@ -111,7 +111,7 @@ function draw() {
   	if((frameCount - game.startFrame) % 100 === 0) {
 			var ply = game.players.length;
   	  while(ply--) {
-    	  game.players[ply].tailLength += 2;
+    	  game.players[ply].tailLength *= 1.05;
   	  }
 		}
 		var tp = game.tailParts.length;
